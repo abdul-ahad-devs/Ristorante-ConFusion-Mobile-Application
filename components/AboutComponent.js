@@ -36,12 +36,13 @@ const History = () => {
 
         const renderLeaders = ({item, index}) => {
             return (
-                <ListItem
+                <Tile
                     key={index}
                     title={item.name}
-                    subtitle={item.description}
-                    hideChevron={true}
-                    leftAvatar={{ source: require('./images/alberto.png')}}
+                    caption={item.description}
+                    featured
+                    onPress={() => navigate('Dishdetail', { dishId: item.id })}
+                    imageSrc={{ }}
                 />
             );
         };
@@ -52,9 +53,9 @@ const History = () => {
                 <Card title='Corporate Leadership'>
                     <FlatList 
                         data={this.state.leaders}
-                        renderItem={renderLeaders}
+                        renderItem={renderLeader}
                         keyExtractor={item => item.id.toString()}
-                        />
+                    />
                 </Card>
             </ScrollView>
         );

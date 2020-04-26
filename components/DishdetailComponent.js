@@ -5,7 +5,6 @@ import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
 import Moment from 'moment';
 
-
 function RenderDish(props) {
 
     const dish = props.dish;
@@ -14,7 +13,7 @@ function RenderDish(props) {
             return(
                 <Card
                     featuredTitle={dish.name}
-                    image={require('./images/uthappizza.png')}>
+                    image={ { uri: baseUrl + dish.image }}>
                     <Text style={{margin: 10}}>
                         {dish.description}
                     </Text>
@@ -86,10 +85,10 @@ class DishDetail extends Component {
         const dishId = this.props.navigation.getParam('dishId','');
         return(
             <ScrollView>
-               <RenderDish dish={this.state.dishes[+dishId]}
+                <RenderDish dish={this.state.dishes[+dishId]}
                     favorite={this.state.favorites.some(el => el === dishId)}
                     onPress={() => this.markFavorite(dishId)} 
-                />
+                    />
                 <RenderComments comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
             </ScrollView>
         );

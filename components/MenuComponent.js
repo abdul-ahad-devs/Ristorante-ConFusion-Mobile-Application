@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
 import { DISHES } from '../shared/dishes';
 
 class Menu extends Component {
@@ -9,7 +9,7 @@ class Menu extends Component {
         super(props);
         this.state = {
             dishes: DISHES
-        };
+        }
     }
 
     static navigationOptions = {
@@ -21,26 +21,25 @@ class Menu extends Component {
         const renderMenuItem = ({item, index}) => {
 
             return (
-                <ListItem
+                <Tile
                     key={index}
                     title={item.name}
-                    subtitle={item.description}
-                    hideChevron={true}
-                    onPress={() => navigate('DishDetail', { dishId: item.id })}
-                    leftAvatar={{ source: require('./images/uthappizza.png')}}
-                    data={this.state.dishes}
-                />
+                    caption={item.description}
+                    featured
+                    onPress={() => navigate('Dishdetail', { dishId: item.id })}
+                    imageSrc={{ uri: baseUrl + item.image}}
+                    />
             );
         };
 
         const { navigate } = this.props.navigation;
     
         return (
-                <FlatList 
-                    data={this.state.dishes}
-                    renderItem={renderMenuItem}
-                    keyExtractor={item => item.id.toString()}
-                    />
+            <FlatList 
+                data={this.state.dishes}
+                renderItem={renderMenuItem}
+                keyExtractor={item => item.id.toString()}
+                />
         );
     }
 }

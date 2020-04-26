@@ -4,11 +4,9 @@ import Menu from './MenuComponent';
 import ContactUs from './ContactComponent';
 import AboutUs from './AboutComponent';
 import DishDetail from './DishdetailComponent';
-import { DISHES } from '../shared/dishes';
 import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
-import { LEADERS } from '../shared/leaders';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 const MenuNavigator = createStackNavigator({
   Menu: { screen: Menu,
@@ -183,21 +181,9 @@ const MainNavigator = createDrawerNavigator({
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: DISHES,
-      leaders: LEADERS,
-      selectedDish: null
-    };
-  }
-
-  onDishSelect(dishId) {
-    this.setState({selectedDish: dishId})
-  }
 
   render() {
- 
+    
     return (
       <View style={{flex:1, paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight }}>
         <MainNavigator />
