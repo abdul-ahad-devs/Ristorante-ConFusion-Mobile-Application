@@ -43,13 +43,27 @@ class Menu extends Component {
             );
         };
 
-        return (
-            <FlatList 
-                    data={this.props.dishes.dishes}
-                    renderItem={renderMenuItem}
-                    keyExtractor={item => item.id.toString()}
-                />
-        );
+        if(this.props.isLoading) {
+            return(
+                <Loading />
+            );
+        }
+        else if (this.props.errmess) {
+            return(
+                <View>            
+                    <Text>{props.dishes.errMess}</Text>
+                </View> 
+            );
+        }
+        else {
+            return (
+                <FlatList 
+                        data={this.props.dishes.dishes}
+                        renderItem={renderMenuItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+            );
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent'; 
 
 const mapStateToProps = state => {
     return {
@@ -19,8 +20,18 @@ const mapStateToProps = state => {
 function RenderItem(props) {
     
     const item = props.item;
-    
-    if (item != null) {
+
+    if(props.isLoading) {
+        return(
+            <Loading />
+        );
+    }
+    else if(props.errmess) {
+        return (
+            <Text>{props.errmess}</Text>
+        )
+    }
+    else if (item != null) {
         return(
             <Card
                 featuredTitle={item.name}
@@ -45,8 +56,6 @@ static navigationOptions = {
 
 render() {
 
-    console.log(this.props.dishes)
-    console.log('hello there');
     return(
         <ScrollView>
             <RenderItem item={this.props.dishes.dishes.filter((dish) => dish.featured)[0]} />
@@ -54,6 +63,7 @@ render() {
             <RenderItem item={this.props.leaders.leaders.filter((leader) => leader.featured)[0]} />
         </ScrollView>
     );
+ 
 }
 }
 
