@@ -1,95 +1,28 @@
 import React, { Component } from 'react';
-import Home from './HomeComponent';
-import Menu from './MenuComponent';
-import ContactUs from './ContactComponent';
-import AboutUs from './AboutComponent';
-import DishDetail from './DishdetailComponent';
+import { DISHES } from '../shared/dishes';
+import { LEADERS } from '../shared/leaders';
 import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
-import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
+import { createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
+import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator } from './stackNavigators';
 
-const MenuNavigator = createStackNavigator({
-  Menu: { screen: Menu,
-    navigationOptions: {
-      headerLeft: <Icon name="menu" size={30}
-        color='white'
-        onPress={() => navigation.toggleDrawer()}
-        />
-    }
-     
-},
-  DishDetail: { screen: DishDetail }
-},
-{
-  initialRouteName: 'Menu',
-  navigationOptions: {
-      headerStyle: {
-          backgroundColor: "#512DA8"
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-          color: "#fff"            
-      }
+const mapStateToProps = state => {
+  return {
+    dishes: state.dishes,
+    comments: state.comments,
+    promotions: state.promotions,
+    leaders: state.leaders
   }
 }
-);
 
-const HomeNavigator = createStackNavigator({
-  Home: { screen: Home }
-}, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-        backgroundColor: "#512DA8"
-    },
-    headerTitleStyle: {
-        color: "#fff"            
-    },
-    headerTintColor: "#fff",
-    headerLeft: <Icon name='menu' size={30}
-      color='white'
-      onPress={() => navigation.toggleDrawer()}
-      />
-    
-  })
-});
-
-const ContactUsNavigator = createStackNavigator({
-  ContactUs: { screen: ContactUs }
-}, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-        backgroundColor: "#512DA8"
-    },
-    headerTitleStyle: {
-        color: "#fff"            
-    },
-    headerTintColor: "#fff",
-    headerLeft: <Icon name="menu" size={30}
-      color='white'
-      onPress={() => navigation.toggleDrawer()}
-
-      />
-    
-  })
-});
-
-const AboutUsNavigator = createStackNavigator({
-  AboutUs: { screen: AboutUs }
-}, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-        backgroundColor: "#512DA8"
-    },
-    headerTitleStyle: {
-        color: "#fff"            
-    },
-    headerTintColor: "#fff",
-    headerLeft: <Icon name='menu' size={30}
-      color='white' onPress={() => navigation.toggleDrawer()}
-      />
-   
-  })
-});
+const mapDispatchToProps = dispatch => ({
+  fetchDishes: () => dispatch(fetchDishes()),
+  fetchComments: () => dispatch(fetchComments()),
+  fetchPromos: () => dispatch(fetchPromos()),
+  fetchLeaders: () => dispatch(fetchLeaders()),
+})
 
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
@@ -107,7 +40,6 @@ const CustomDrawerContentComponent = (props) => (
   </ScrollView>
 );
 
-
 const MainNavigator = createDrawerNavigator({
   Home: 
     { screen: HomeNavigator,
@@ -115,14 +47,13 @@ const MainNavigator = createDrawerNavigator({
         title: 'Home',
         drawerLabel: 'Home',
         drawerIcon: ({ tintColor }) => (
-            <Icon
-              name='home'
-              type='font-awesome'            
-              size={24}
-              color={tintColor}
-            />
-          ),
-        
+          <Icon 
+            name='home'
+            type='font-awesome'
+            size={24}
+            color={tintColor}
+          />
+        )
       }
     },
   AboutUs: {
@@ -131,14 +62,13 @@ const MainNavigator = createDrawerNavigator({
       title: 'About Us',
       drawerLabel: 'About Us',
       drawerIcon: ({ tintColor }) => (
-        <Icon
+        <Icon 
           name='info-circle'
-          type='font-awesome'            
+          type='font-awesome'
           size={24}
           color={tintColor}
         />
-      ),
-      
+      )
     }
   },
   Menu: 
@@ -147,14 +77,13 @@ const MainNavigator = createDrawerNavigator({
         title: 'Menu',
         drawerLabel: 'Menu',
         drawerIcon: ({ tintColor }) => (
-          <Icon
+          <Icon 
             name='list'
-            type='font-awesome'            
+            type='font-awesome'
             size={24}
             color={tintColor}
           />
-        ),
-        
+        )
       }
     },
   ContactUs:
@@ -164,26 +93,45 @@ const MainNavigator = createDrawerNavigator({
       title: 'Contact Us',
       drawerLabel: 'ContactUs',
       drawerIcon: ({ tintColor }) => (
-        <Icon
+        <Icon 
           name='address-card'
-          type='font-awesome'            
+          type='font-awesome'
           size={22}
           color={tintColor}
         />
-      ),
-      
+      )
     }
   }
 },
  {
-  drawerBackgroundColor: '#D1C4E9',
-  contentComponent: CustomDrawerContentComponent
+drawerBackgroundColor: '#D1C4E9',
+contentComponent: CustomDrawerContentComponent
 });
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dishes: DISHES,
+      leaders: LEADERS,
+      selectedDish: null
+    };
+  }
+
+  onDishSelect(dishId) {
+    this.setState({selectedDish: dishId})
+  }
+
+  componentDidMount() {
+    this.props.fetchDishes();
+    this.props.fetchComments();
+    this.props.fetchPromos();
+    this.props.fetchLeaders();
+  }
+  
 
   render() {
-    
+ 
     return (
       <View style={{flex:1, paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight }}>
         <MainNavigator />
@@ -191,7 +139,7 @@ class Main extends Component {
     );
   }
 }
-  
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -215,5 +163,5 @@ const styles = StyleSheet.create({
     height: 60
   }
 });
-
-export default Main;
+  
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
