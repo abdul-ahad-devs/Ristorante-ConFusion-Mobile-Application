@@ -10,12 +10,12 @@ import { Icon } from 'react-native-elements';
 
 const MenuNavigator = createStackNavigator({
   Menu: { screen: Menu,
-    navigationOptions:({ navigation }) => ({
+    navigationOptions: {
       headerLeft: <Icon name="menu" size={30}
         color='white'
         onPress={() => navigation.toggleDrawer()}
         />
-    })
+    }
      
 },
   DishDetail: { screen: DishDetail }
