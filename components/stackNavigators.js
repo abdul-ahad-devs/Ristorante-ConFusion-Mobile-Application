@@ -4,6 +4,7 @@ import Menu from './MenuComponent';
 import ContactUs from './ContactComponent';
 import AboutUs from './AboutComponent';
 import DishDetail from './DishdetailComponent';
+import Reservation from './ReservationComponent';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -82,3 +83,20 @@ export const MenuNavigator = createStackNavigator({
       />  
     })
   });
+
+  export const ReservationNavigator = createStackNavigator({
+    Reservation: { screen: Reservation }
+  }, {
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+          backgroundColor: "#512DA8"
+      },
+      headerTitleStyle: {
+          color: "#fff"            
+      },
+      headerTintColor: "#fff",
+      headerLeft: <Icon name="menu" size={24}
+        iconStyle={{ color: 'white' }} 
+        onPress={ () => navigation.navigate('DrawerToggle') } />    
+    })
+  })

@@ -6,7 +6,8 @@ import { createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigati
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
-import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator } from './stackNavigators';
+import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator, ReservationNavigator } from './stackNavigators';
+import Reservation from './ReservationComponent';
 
 const mapStateToProps = state => {
   return {
@@ -101,8 +102,25 @@ const MainNavigator = createDrawerNavigator({
         />
       )
     }
+  },
+  Reservation:
+  {
+    screen: ReservationNavigator,
+    navigationOptions: {
+      title: 'Reserve Table',
+      drawerLabel: 'Reserve Table',
+      drawerIcon: ({ tintColor }) => (
+        <Icon 
+          name='cutlery'
+          type='font-awesome'
+          size={24}
+          color={tintColor}
+        />
+      )
+    }
   }
 },
+  
  {
 drawerBackgroundColor: '#D1C4E9',
 contentComponent: CustomDrawerContentComponent
