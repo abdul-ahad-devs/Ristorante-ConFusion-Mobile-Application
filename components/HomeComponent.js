@@ -7,6 +7,7 @@ import { LEADERS } from '../shared/leaders';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent'; 
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -33,14 +34,16 @@ function RenderItem(props) {
     }
     else if (item != null) {
         return(
-            <Card
-                featuredTitle={item.name}
-                featuredSubtitle={item.designation}
-                image={{uri: baseUrl + item.image}}>
-                <Text
-                    style={{margin: 10}}>
-                    {item.description}</Text>
-            </Card>
+            <Animatable.View animation="fadeInDown" duration={2000} >
+                <Card
+                    featuredTitle={item.name}
+                    featuredSubtitle={item.designation}
+                    image={{uri: baseUrl + item.image}}>
+                    <Text
+                        style={{margin: 10}}>
+                        {item.description}</Text>
+                </Card>
+            </Animatable.View>
         );
     }
     else {
