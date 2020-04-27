@@ -5,9 +5,11 @@ import ContactUs from './ContactComponent';
 import AboutUs from './AboutComponent';
 import DishDetail from './DishdetailComponent';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoritesComponent';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-
+import { createStore } from 'redux';
+import { createNamedExports } from 'typescript';
 
 export const MenuNavigator = createStackNavigator({
     Menu: { screen: Menu,
@@ -33,70 +35,88 @@ export const MenuNavigator = createStackNavigator({
   }
   );
   
-  export const HomeNavigator = createStackNavigator({
-    Home: { screen: Home }
-  }, {
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: {
-          backgroundColor: "#512DA8"
-      },
-      headerTitleStyle: {
-          color: "#fff"            
-      },
-      headerTintColor: "#fff",
-      headerLeft: <Icon name='menu' size={30}
-        color='white' onPress={() => navigation.toggleDrawer()}
-      />  
-    })
-  });
-  
-  export const ContactUsNavigator = createStackNavigator({
-    ContactUs: { screen: ContactUs }
-  }, {
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: {
-          backgroundColor: "#512DA8"
-      },
-      headerTitleStyle: {
-          color: "#fff"            
-      },
-      headerTintColor: "#fff",
-      headerLeft: <Icon name='menu' size={30}
-        color='white' onPress={() => navigation.toggleDrawer()}
-      />  
-    })
-  });
-  
-  export const AboutUsNavigator = createStackNavigator({
-    AboutUs: { screen: AboutUs }
-  }, {
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: {
-          backgroundColor: "#512DA8"
-      },
-      headerTitleStyle: {
-          color: "#fff"            
-      },
-      headerTintColor: "#fff",
-      headerLeft: <Icon name='menu' size={30}
-        color='white' onPress={() => navigation.toggleDrawer()}
-      />  
-    })
-  });
-
-  export const ReservationNavigator = createStackNavigator({
-    Reservation: { screen: Reservation }
-  }, {
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: {
-          backgroundColor: "#512DA8"
-      },
-      headerTitleStyle: {
-          color: "#fff"            
-      },
-      headerTintColor: "#fff",
-      headerLeft: <Icon name="menu" size={24}
-        iconStyle={{ color: 'white' }} 
-        onPress={ () => navigation.navigate('DrawerToggle') } />    
-    })
+export const HomeNavigator = createStackNavigator({
+  Home: { screen: Home }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name='menu' size={30}
+      color='white' onPress={() => navigation.toggleDrawer()}
+    />  
   })
+});
+
+export const ContactUsNavigator = createStackNavigator({
+  ContactUs: { screen: ContactUs }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name='menu' size={30}
+      color='white' onPress={() => navigation.toggleDrawer()}
+    />  
+  })
+});
+
+export const AboutUsNavigator = createStackNavigator({
+  AboutUs: { screen: AboutUs }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name='menu' size={30}
+      color='white' onPress={() => navigation.toggleDrawer()}
+    />  
+  })
+});
+
+export const ReservationNavigator = createStackNavigator({
+  Reservation: { screen: Reservation }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name='menu' size={30}
+      color='white' onPress={() => navigation.toggleDrawer()}
+    />  
+  })
+})
+
+export const FavoritesNavigator = createStackNavigator({
+  Favorites: { screen: Favorites }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name='menu' size={30}
+      color='white' onPress={() => navigation.toggleDrawer()}
+    />  
+  })
+});
+

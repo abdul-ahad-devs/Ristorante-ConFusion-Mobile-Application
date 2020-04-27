@@ -6,8 +6,7 @@ import { createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigati
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
-import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator, ReservationNavigator } from './stackNavigators';
-import Reservation from './ReservationComponent';
+import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator, ReservationNavigator, FavoritesNavigator } from './stackNavigators';
 
 const mapStateToProps = state => {
   return {
@@ -96,6 +95,22 @@ const MainNavigator = createDrawerNavigator({
       drawerIcon: ({ tintColor }) => (
         <Icon 
           name='address-card'
+          type='font-awesome'
+          size={22}
+          color={tintColor}
+        />
+      )
+    }
+  },
+  Favorites:
+  {
+    screen: FavoritesNavigator,
+    navigationOptions: {
+      title: 'My Favorites',
+      drawerLabel: 'My Favorites',
+      drawerIcon: ({ tintColor }) => (
+        <Icon 
+          name='heart'
           type='font-awesome'
           size={22}
           color={tintColor}
