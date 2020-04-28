@@ -6,6 +6,7 @@ import AboutUs from './AboutComponent';
 import DishDetail from './DishdetailComponent';
 import Reservation from './ReservationComponent';
 import Favorites from './FavoritesComponent';
+import Login from './LoginComponent';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { createStore } from 'redux';
@@ -105,6 +106,23 @@ export const ReservationNavigator = createStackNavigator({
 
 export const FavoritesNavigator = createStackNavigator({
   Favorites: { screen: Favorites }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name='menu' size={30}
+      color='white' onPress={() => navigation.toggleDrawer()}
+    />  
+  })
+});
+
+export const LoginNavigator = createStackNavigator({
+  Login: { screen: Login }
 }, {
   navigationOptions: ({ navigation }) => ({
     headerStyle: {

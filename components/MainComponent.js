@@ -6,7 +6,7 @@ import { createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigati
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
-import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator, ReservationNavigator, FavoritesNavigator } from './stackNavigators';
+import { HomeNavigator, MenuNavigator, ContactUsNavigator, AboutUsNavigator, ReservationNavigator, FavoritesNavigator, LoginNavigator } from './stackNavigators';
 
 const mapStateToProps = state => {
   return {
@@ -41,6 +41,21 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 const MainNavigator = createDrawerNavigator({
+  Login: 
+    { screen: LoginNavigator,
+      navigationOptions: {
+        title: 'Login',
+        drawerLabel: 'Login',
+        drawerIcon: ({ tintColor }) => (
+          <Icon 
+            name='sign-in'
+            type='font-awesome'
+            size={24}
+            color={tintColor}
+          />
+        )
+      }
+    },
   Home: 
     { screen: HomeNavigator,
       navigationOptions: {
@@ -137,8 +152,9 @@ const MainNavigator = createDrawerNavigator({
 },
   
  {
-drawerBackgroundColor: '#D1C4E9',
-contentComponent: CustomDrawerContentComponent
+  initialRouteName: 'Home',
+  drawerBackgroundColor: '#D1C4E9',
+  contentComponent: CustomDrawerContentComponent
 });
 
 class Main extends Component {
