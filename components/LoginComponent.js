@@ -154,6 +154,21 @@ class RegisterTab extends Component {
         }
     }
 
+    getImageFromGallery = async () => {
+
+        let image = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        if(!image.cancelled) {
+            console.log(image);
+            this.processImage(image.uri );
+        }
+        
+    }
+
     processImage = async (imageUri) => {
         let processedImage = await ImageManipulator.manipulateAsync(
             imageUri, 
@@ -215,6 +230,10 @@ class RegisterTab extends Component {
                             title="Camera"
                             onPress={this.getImageFromCamera}
                             />
+                        <Button
+                            title="Gallery"
+                            onPress={this.getImageFromGallery}
+                            />
                     </View>
                     <Input
                         placeholder="Username"
@@ -226,6 +245,7 @@ class RegisterTab extends Component {
                     <Input
                         placeholder="Password"
                         leftIcon={{ type: 'font-awesome', name: 'key' }}
+                        secureTextEntry
                         onChangeText={(password) => this.setState({password})}
                         value={this.state.password}
                         containerStyle={styles.formInput}
@@ -301,7 +321,8 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         flexDirection: 'row',
-        margin: 10
+        margin: 10,
+        justifyContent: 'space-around'
     },
     image: {
       margin: 10,
