@@ -108,30 +108,30 @@ class Reservation extends Component {
                     </Switch>
                     </View>
                     <View style={styles.formRow}>
-                    <Text style={styles.formLabel}>Date and Time</Text>
-                    <DatePicker
-                        style={{flex: 2, marginRight: 'auto'}}
-                        date={this.state.date}
-                        format='DD-MMMM-YYYY'
-                        mode="datetime"
-                        placeholder="Select Date and Time"
-                        minDate="2017-01-01"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        customStyles={{
-                        dateIcon: {
-                            position: 'absolute',
-                            left: 0,
-                            top: 4,
-                            marginLeft: 0
-                        },
-                        dateInput: {
-                            marginLeft: 36
-                        }
-                        // ... You can check the source to find the other keys. 
-                        }}
-                        onDateChange={(date) => {this.setState({date: date})}}
-                    />
+                        <Text style={styles.formLabel}>Date and Time</Text>
+                        <DatePicker
+                            style={{flex: 2, marginRight: 'auto'}}
+                            date={this.state.date}
+                            format=''
+                            mode="datetime"
+                            placeholder="Select Date and Time"
+                            minDate="2020-01-01"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys. 
+                            }}
+                            onDateChange={(date) => {this.setState({date: date})}}
+                        />
                     </View>
 
                     <View style={styles.formBtn}>
